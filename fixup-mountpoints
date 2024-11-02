@@ -14,6 +14,13 @@ shift
 echo "Fixing mount-points for device $DEVICE"
 
 case "$DEVICE" in
+    "pdx224")
+	sed -i \
+            -e 's block/bootdevice/by-name/boot sda68 ' \
+            -e 's block/bootdevice/by-name/userdata sda94 ' \
+            "$@"
+        ;;
+
     "pdx235")
         sed -i \
             -e 's block/bootdevice/by-name/LTALabel sda3 ' \
