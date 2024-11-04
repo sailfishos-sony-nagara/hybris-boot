@@ -210,7 +210,7 @@ inject_loop() {
 usb_setup_configfs() {
     # see e.g. https://github.com/sonyxperiadev/vendor-qcom-opensource-usb/blob/aosp/LA.UM.9.12.r1/etc/init.qcom.usb.sh#L133
     write /sys/devices/platform/soc/a600000.ssusb/mode peripheral
-    usleep 100000 # kernel asynchronously updates stuff, about 32k msecs in logs are needed, using 100k = 0.1 secs
+    usleep 100000 # kernel asynchronously updates stuff, about 32ms in logs show are needed, using 100ms = 0.1 secs
 
     G_USB_ISERIAL=$GADGET_DIR/g1/strings/0x409/serialnumber
 
@@ -223,7 +223,8 @@ usb_setup_configfs() {
     write $GADGET_DIR/g1/strings/0x409/product      "$CUSTOMPRODUCT"
 
     if echo $USB_FUNCTIONS | grep -q "rndis"; then
-        mkdir $GADGET_DIR/g1/functions/rndis.rndis
+        mkdir $GADGET_DIR/g1/functions/rndis.usb0
+        mkdir $GADGET_DIR/g1/functions/rndis_bam.rndis
     fi
     echo $USB_FUNCTIONS | grep -q "mass_storage" && mkdir $GADGET_DIR/g1/functions/storage.0
 
@@ -232,7 +233,8 @@ usb_setup_configfs() {
     write $GADGET_DIR/g1/configs/c.1/strings/0x409/configuration "$USB_FUNCTIONS"
 
     if echo $USB_FUNCTIONS | grep -q "rndis"; then
-        ln -s $GADGET_DIR/g1/functions/rndis.rndis $GADGET_DIR/g1/configs/c.1
+        ln -s $GADGET_DIR/g1/functions/rndis.usb0 $GADGET_DIR/g1/configs/c.1
+        ln -s $GADGET_DIR/g1/functions/rndis_bam.rndis $GADGET_DIR/g1/configs/c.1
     fi
     echo $USB_FUNCTIONS | grep -q "mass_storage" && ln -s $GADGET_DIR/g1/functions/storage.0 $GADGET_DIR/g1/configs/c.1
 
