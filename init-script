@@ -210,7 +210,7 @@ inject_loop() {
 usb_setup_configfs() {
     # see e.g. https://github.com/sonyxperiadev/vendor-qcom-opensource-usb/blob/aosp/LA.UM.9.12.r1/etc/init.qcom.usb.sh#L133
     write /sys/devices/platform/soc/a600000.ssusb/mode peripheral
-    usleep 100000 # kernel asynchronously updates stuff, about 32ms in logs show are needed, using 100ms = 0.1 secs
+    sleep 1 # kernel asynchronously updates stuff, about 32ms in logs show are needed. `usleep 100000` however is not defined.
 
     G_USB_ISERIAL=$GADGET_DIR/g1/strings/0x409/serialnumber
 
