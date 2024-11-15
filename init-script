@@ -252,7 +252,7 @@ usb_setup_android_usb() {
     write $ANDROID_USB/enable          0
     write $ANDROID_USB/functions       ""
     write $ANDROID_USB/enable          1
-    usleep 500000 # 0.5 delay to attempt to remove rndis function
+    sleep 1 # usleep 500000 (usleep is not defined) # 0.5 delay to attempt to remove rndis function
     write $ANDROID_USB/enable          0
     write $ANDROID_USB/idVendor        18D1
     write $ANDROID_USB/idProduct       D001
