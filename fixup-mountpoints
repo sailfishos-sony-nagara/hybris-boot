@@ -236,7 +236,7 @@ case "$DEVICE" in
             -e 's block/bootdevice/by-name/modemst2 sda40 ' \
             -e 's block/bootdevice/by-name/multiimgoem_a sdb3 ' \
             -e 's block/bootdevice/by-name/multiimgoem_b sdc3 ' \
-            -e 's block/by-name/oem sda76 ' \
+            -e 's block/by-name/oem_a sda76 ' \
             -e 's block/bootdevice/by-name/oem_b sda90 ' \
             -e 's block/bootdevice/by-name/persist sda3 ' \
             -e 's block/bootdevice/by-name/qupfw_a sda16 ' \
